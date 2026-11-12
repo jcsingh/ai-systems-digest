@@ -295,8 +295,8 @@
       <div class="tagline">How large-scale AI systems are actually built — and where they still break</div>
     </div>
     <div class="meta">
-      <div class="edition">Edition 017</div>
-      <div>Wed, Nov 04, 2026</div>
+      <div class="edition">Edition 018</div>
+      <div>Thu, Nov 12, 2026</div>
     </div>
   </div>
 
@@ -310,6 +310,58 @@
       <summary>Previous editions</summary>
       <p class="archive-intro">From Edition 005 onward, every retained edition&rsquo;s briefs stay fully interactive &mdash; click any card below to open its complete page, exactly as in the current edition. The Industry and Repos strips are untemplated and have no detail pages, so each edition&rsquo;s strips are preserved as flat text underneath. Editions 001&ndash;003 ran in the earliest one-paragraph format and Edition 004 predates the structured-brief retention, so all four are preserved exactly as they were published.</p>
       <div id="archive-briefs"></div>
+      <details class="archive-edition">
+      <summary>Edition 017 &mdash; Wed, Nov 04, 2026 &middot; industry &amp; repos <span class="count">&middot; 3 industry &middot; 4 repos</span></summary>
+
+      <section class="category">
+        <div class="category-head">
+          <span class="tag">SIGNAL</span>
+          <h2>Industry</h2>
+          <span class="rule"></span>
+        </div>
+        <div class="entries">
+          <div class="entry">
+            <div class="entry-name-row"><span class="entry-name">Reflection AI&#x27;s Beam: a 501B open-weight MoE under Apache 2.0, with Nvidia reportedly weighing an acquisition</span></div>
+            <div class="entry-desc">Reflection announced Beam Oct 5; LLM Daily headlined a launch Nov 4. Release timing conflicts across sources: one third-party write-up says weights reached Hugging Face Oct 16 under plain Apache 2.0, another said Oct 5 that they were still unreleased, and I could not verify against Hugging Face or Reflection directly. It is a text-only sparse MoE with 501B total and about 23B active parameters, a 1M-token context, 23.8T pretraining tokens, and an RL run on 10,500 GB300 GPUs for four weeks. Reflection&#x27;s own claims, not independently verified per TechCrunch: SWE-Bench Verified 80.9, Terminal-Bench v2.1 80.1, SWE-Bench Pro v2-Hard 77.2, and 3-4x less inference compute than rival Western open models. One third-party figure points the other way: an Artificial Analysis score of 30 against 45 for DeepSeek V4.1 Flash and GLM-5.3. Serving cost, per that write-up: about 353 GB of GPU memory for NVFP4 (4x B200/B300 or 8x H100), about 604 GB for FP8, CUDA-only kernels, a special reflection-beam vLLM image, a roughly 10-minute first start, and a sample serve command capped at 262K context; vLLM 0.33.0 lists Beam-1.0 support. Some users reported looping in long agent runs. The FT reported Oct 10 that Nvidia is in early talks to deepen its investment, acquire Reflection or hire its team; no price is reported and the talks could collapse.</div>
+          </div>
+          <div class="entry">
+            <div class="entry-name-row"><span class="entry-name">Claude Developer Platform, Oct 28 to Nov 3: 128 MB requests, server-side threads, a new usage API, and Opus 4.8 fast mode ends Nov 30</span></div>
+            <div class="entry-desc">From the releasebot aggregator, not cross-checked against Anthropic&#x27;s docs. Oct 28: the request size limit for the Messages and Token Counting APIs rose from 32 MB to 128 MB. Oct 29: a beta Usage and Cost Analytics API reports by model, workspace, API key and requester, and the older usage and cost APIs are now legacy but supported. Nov 2: beta server-side message threads let later requests send only new messages, which can cut request size and time to first token; threads expire 5 minutes after the last request. Oct 30: Opus 4.8 fast mode is deprecated and will error after Nov 30, 2026. Nov 3: text from Claude Mythos 5, Opus 4.7 and Sonnet 4.6 now carries an Anthropic text watermark (on Sonnet 4.6 it may be absent with non-default sampling settings). The 128 MB limit and server threads change how RAG and agent payloads are assembled, and any cost dashboard on the old endpoints needs a migration. Claude Code: the changelog&#x27;s newest entry is still 2.1.311 (Oct 26), so there was no new release since last edition.</div>
+          </div>
+          <div class="entry">
+            <div class="entry-name-row"><span class="entry-name">NIST, NSA and CISA publish voluntary incident-response practices for training and evaluating superintelligent systems</span></div>
+            <div class="entry-desc">NIST CAISSI with NSA and CISA, Oct 16: 10 key practices across 5 stages (preparation, detection, response, recovery, reporting), building on NIST SP 800-61r3 and covering agents that take significant uninstructed actions undermining operator controls. It is voluntary and the page states no deadline or mandate. I read the announcement only, not the linked PDF or the 10 practices, so there is nothing yet to say about operational detail. It is the incident-handling counterpart to the eval-side briefs this edition.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="category">
+        <div class="category-head">
+          <span class="tag">REPOS</span>
+          <h2>Trending on GitHub</h2>
+          <span class="rule"></span>
+        </div>
+        <div class="entries">
+          <div class="entry">
+            <div class="entry-name-row"><a class="entry-name" href="https://github.com/cheaper-inference/OmniRoute" target="_blank" rel="noopener">cheaper-inference/OmniRoute</a></div>
+            <div class="entry-desc">About 84.5k stars, 12.7k forks, MIT, 12,196 commits on branch release/v3.8.53, 218 open issues and 338 pull requests (rounded page counts; no release tag or date visible). New to the digest. An AI gateway: one endpoint in front of many providers, usable from Claude Code, Codex, Cursor and Cline, with fallback routing across four provider tiers. Its own figures are inconsistent (375 providers in the description versus 380 in the README, 1,400+ models, 20 routing strategies, 110 MCP tools) and its prompt-compression claim of 15-95% savings, about 89% on average, shows no methodology. The README&#x27;s &#x27;1.62B free tokens a month&#x27; is its estimate of third-party free tiers, not something it grants. Stated limits: auto routing needs an eligible route, keyless providers may reject third-party clients, and providers flagged tos: avoid are excluded. Missing: any routing-quality or latency benchmark, and a language breakdown. For LLMOps, the useful part is a gateway with explicit fallback and a terms-of-service flag per provider.</div>
+          </div>
+          <div class="entry">
+            <div class="entry-name-row"><a class="entry-name" href="https://github.com/firecrawl/firecrawl" target="_blank" rel="noopener">firecrawl/firecrawl</a> <span class="flagged">retrieval</span></div>
+            <div class="entry-desc">About 196.1k stars (findarepo said 198k), 10.4k forks, 6,714 commits on main; primarily AGPL-3.0 with the SDKs and some UI components MIT, which matters if you self-host it inside a product. New to the digest. The page&#x27;s description is &#x27;Supercharge your AI agents with data from the web and beyond.&#x27; This is a thin entry: I did not read the README feature list, so I cannot describe its crawl or scrape capabilities, and I saw no release information or crawl-quality figure. Included because web ingestion is the front of many RAG pipelines and the licence is the decision point.</div>
+          </div>
+          <div class="entry">
+            <div class="entry-name-row"><a class="entry-name" href="https://github.com/herdrdev/herdr" target="_blank" rel="noopener">herdrdev/herdr</a></div>
+            <div class="entry-desc">About 46.2k stars (findarepo said 48k), 3.7k forks, Apache-2.0, 1,878 commits on master. New to the digest. A terminal runtime for coding agents, apparently written in Rust: a background server keeps terminals alive when the client closes or SSH drops, a combined list marks each pane working, blocked or idle across saved remote machines, and agents can drive it through a CLI and socket API; it works with Claude Code, Codex, Cursor and OpenCode. Stated limits: processes do not survive a server or machine restart (layout is restored and supported agent sessions can resume), and Windows is a beta. Missing: a release tag, benchmarks and resource overhead. It is operations tooling for running many agents, not a framework.</div>
+          </div>
+          <div class="entry">
+            <div class="entry-name-row"><a class="entry-name" href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noopener">NousResearch/hermes-agent</a> <span class="flagged">agents</span></div>
+            <div class="entry-desc">About 260k stars, 57.3k forks, MIT, 61,708 commits on main; those are very large numbers for this kind of project and I could not verify them beyond the page text. New to the digest. A self-improving personal agent that, per the README, creates skills from experience and refines them in use, with six terminal backends (local, Docker, SSH, Modal, Daytona, Vercel Sandbox), subagents, and a cron scheduler. The retrieval-relevant part is memory: agent-curated memory with persistence nudges and FTS5 full-text session search with LLM summarization for cross-session recall, which is keyword search, not a vector index. Missing: any benchmark of the self-improvement claim or of recall quality, and a release tag.</div>
+          </div>
+        </div>
+      </section>
+
+    </details>
       <details class="archive-edition">
       <summary>Edition 016 &mdash; Sun, Nov 01, 2026 &middot; industry &amp; repos <span class="count">&middot; 3 industry &middot; 2 repos</span></summary>
 
@@ -1660,7 +1712,7 @@
 </div>
 
 <script>
-const CURRENT_EDITION = 17;
+const CURRENT_EDITION = 18;
 const BRIEFS = [
   {
     edition: 11,
@@ -4916,6 +4968,368 @@ const BRIEFS = [
     "gaps": "<p>Evaluation is book-level QA only; coding and tool-using agents, where state is structured and lossy notes are risky, were untested as far as I could read. Costs and the GPT-5.5 and GLM-5.3 comparisons depend on the authors' harness and pricing, and a 13.1% baseline hints the harness may suit off-the-shelf models poorly. Notes are lossy and irreversible, so failures may be silent (my inference). Ablations, data sizes and code release status are unknown to me.</p>",
     "fixes": "<ul><li>Keep an append-only raw store beside the notes so backtracking can re-read source.</li><li>Test on tool-using agents with exact-value facts (IDs, paths) and measure fact-level note recall.</li><li>Reuse stable note prefixes at the KV level so each compaction avoids a full re-prefill.</li></ul>",
     "takeaway": "<p>MEMENTO moves cost from reading long contexts to training a compactor, and adds an uncertainty signal that can trigger re-reading. Reliability then depends on note fidelity rather than raw capacity, which is the open question for retrieval and memory designs.</p>"
+  },
+  {
+    "edition": 18,
+    "id": "pinterest-journeys-4b",
+    "group": "systems",
+    "org": "Pinterest",
+    "title": "One 4B model replaced a five-stage clustering pipeline, and the biggest speedup was not running inference",
+    "hook": "Pinterest dropped keyword extraction, clustering and ranking for a fine-tuned Qwen3 4B that reads 360 days of activity and emits user journeys. About 100 GPUs serve 775 requests/s, with a 1.1% email click lift. Read through summaries; the primary post was blocked.",
+    "source": "Pinterest Engineering (Medium, about Oct 13, 2026) via InfoQ, Nov 9 and ZenML summary",
+    "url": "https://www.infoq.com/news/2026/11/pinterest-journey/",
+    "problem": "<p><strong>Source caveat:</strong> the Medium post could not be fetched (the proxy blocks it). Everything here comes from InfoQ's article and the ZenML write-up, which agree with each other. The Medium date is inferred from a community repost on Oct 13, so this is roughly a month old.</p><p>Pinterest wants longer-term user goals ('a summer wedding', not 'summer dresses') to drive notifications and retrieval. The old pipeline chained keyword extraction, text embeddings, hierarchical clustering, separate naming and ranking models and heuristic stage classification. Errors compounded across stages, related activity split into separate journeys, generic labels like 'Art' appeared, and incidental clicks sometimes outranked real goals.</p>",
+    "solution": "<ul><li>One LoRA-fine-tuned Qwen3 4B takes a profile, board names and up to 150 actions from a 360-day lookback, and outputs a ranked JSON list of up to about 12 journeys of 1-5 words in the user's locale. An empty list is allowed when evidence is weak.</li><li>Searches and saves outweigh comments, likes and clicks; dislikes are kept as suppression signals. Decoding is temperature 0, reasoning off, 300-token cap.</li><li>Training labels come from frontier-model teachers that use reasoning tokens the student does not. 0.6B, 1.7B, 4B and 8B were tried; quality plateaued after a few thousand examples and hard, diverse examples mattered more than volume.</li><li><strong>Company-reported serving:</strong> about 100 L40S GPUs, about 775 end-to-end requests/s, median latency about 1.2 s, p95 about 3.0 s.</li><li><strong>A/B (US and Canada):</strong> email click-through +1.1%, push opens +1.3%, with several sitewide engagement and retention metrics significant.</li></ul>",
+    "technology": "<ul><li>Qwen3 4B with LoRA; NVIDIA Dynamo in front of vLLM decode workers; PagedAttention, continuous batching, prefix caching of the shared system prompt, chunked prefill, KV-cache-aware routing</li><li>An LLM judge for evaluation, embedding retrieval and Pin-ranking models downstream</li></ul>",
+    "architecture": "<p>Journeys are generated in batch, filtered, stored per user, and then used as embedding queries for retrieval and ranking. A full refresh runs when the algorithm changes, with daily incremental runs for active users.</p>",
+    "flow": {
+      "nodes": [
+        {
+          "t": "Prompt assembly",
+          "s": "profile, boards, 150 events"
+        },
+        {
+          "t": "Journey generation",
+          "s": "4B Qwen3, greedy decode",
+          "hot": true
+        },
+        {
+          "t": "Parse + safety filter",
+          "s": "notification filters, dedupe"
+        },
+        {
+          "t": "Per-user storage",
+          "s": "skip if refreshed recently",
+          "hot": true
+        },
+        {
+          "t": "Retrieval + ranking",
+          "s": "journey name becomes a query"
+        }
+      ],
+      "cap": "The serving economics, not the model, were the hard part."
+    },
+    "learnings": "<ul><li><strong>Prompt text now holds ranking and safety policy,</strong> so Pinterest treats prompt edits as production launches.</li><li><strong>Skipping inference for recently processed users</strong> was the throughput win that mattered most.</li><li><strong>Distillation plus data curation</strong> beat scaling labels.</li><li><strong>Keep the legacy system</strong> as a cold-start fallback.</li></ul>",
+    "gaps": "<p>The post has a limitations section. Admitted: reliance on teacher-model judgments, limited ground truth for intent, possible bias in the LLM evaluator, inference cost at very large scale, lower interpretability with semantic IDs, and difficulty turning per-item feedback into ranked-list optimization.</p><p>Omitted: experiment sizes, confidence intervals, absolute baselines, notification-volume effects, error rate for sensitive-topic inference (under-18 users in the EEA, Switzerland and the UK are currently ineligible), and cost per request. I have not read the Medium text itself.</p>",
+    "fixes": "<ul><li>Build a small human-labelled gold set of journeys to calibrate the LLM judge and expose evaluator bias.</li><li>Report holdout lift with confidence intervals, and tie the cache TTL to activity change instead of a fixed window.</li><li>Add a sensitive-inference audit set (health, politics) with a measured miss rate before expanding regions.</li></ul>",
+    "takeaway": "<p>Pinterest collapsed a multi-stage pipeline into one distilled model whose prompt is the policy layer. The expensive part was serving and refresh economics: KV-aware routing, prefix caching and skip-if-fresh scheduling are why roughly 100 GPUs suffice. The unmeasured part is correctness, because ground truth for intent is thin.</p>"
+  },
+  {
+    "edition": 18,
+    "id": "walmart-batch-agents",
+    "group": "systems",
+    "org": "Walmart Global Tech",
+    "title": "Valid JSON hid the nonsense: a Honeycrisp apple filed under auto parts, and $100k a month became $10k",
+    "hook": "Walmart's nightly multi-agent LLM workflow advises about 4,700 stores on fresh-food stock. Schema validation passed outputs that were vague or wrong, so they added catalog checks over MCP and bounded retries. Moving off reserved capacity cut cost about 90%, by the speaker's account.",
+    "source": "InfoQ presentation (QCon AI Boston 2026), Nov 10, 2026",
+    "url": "https://www.infoq.com/presentations/scaling-multi-agent-llm-batch/",
+    "problem": "<p>Predict fresh-food inventory per department for the next several days across about 4,700 US stores and hundreds of thousands of SKUs. Existing ML models are backward-looking, trained on about two years of sales, and miss unprecedented events such as storms and flash sales. I read the InfoQ page's summary, not a full transcript.</p>",
+    "solution": "<ul><li>A nightly batch multi-agent LLM workflow layers context on top of the ML forecast and produces a natural-language directive per store manager, who accepts or overrides it.</li><li><strong>Cost:</strong> 400 reserved provisioned-throughput units at about $100k-$120k a month, billed 24/7 although the job runs overnight. Pay-as-you-go with retry logic for rate limits cut it to about $10k a month with quality reportedly unchanged.</li><li><strong>Failures and fixes:</strong> schema-valid but vague output (structured output plus semantic checks on SKU, item and department); SKU collisions such as a Honeycrisp Apple mapped to auto_parts (an MCP coherence check against the product catalog); dropped results from database write timeouts (a bounded-retry loop agent); poor visibility (structured logs of retries, schema violations and latency).</li></ul>",
+    "technology": "<ul><li>Sequential then loop-agent LLM workflow, MCP tools, BigQuery, weather and event APIs, product-catalog validation, structured output</li><li>The LLM vendor is not named on the page</li></ul>",
+    "architecture": "<p>Context is gathered, past sales are synthesized, weather and events are layered in, a directive is generated, then semantically validated against the catalog before a bounded retry-and-persist step and human review.</p>",
+    "flow": {
+      "nodes": [
+        {
+          "t": "Context gathering",
+          "s": "BigQuery and MCP tools"
+        },
+        {
+          "t": "Grounded analysis",
+          "s": "sales, weather, events"
+        },
+        {
+          "t": "Directive generation",
+          "s": "natural-language action"
+        },
+        {
+          "t": "Semantic validation",
+          "s": "catalog coherence via MCP",
+          "hot": true
+        },
+        {
+          "t": "Retry + persist",
+          "s": "bounded loop, human override",
+          "hot": true
+        }
+      ],
+      "cap": "Schema validation is the baseline; semantic validation is the work."
+    },
+    "learnings": "<ul><li><strong>Valid structure is not valid content.</strong> The catalog check is what catches nonsense.</li><li><strong>Match the capacity model to the workload:</strong> reserved throughput is wrong for a nightly batch.</li><li><strong>Place retries deliberately</strong> to avoid runaway token cost.</li><li><strong>Human review is a feature,</strong> in the speaker's words, not a fallback.</li></ul>",
+    "gaps": "<p><strong>There is no quantitative comparison with the legacy forecasting models,</strong> no production accuracy or error rate (the 97% and 2.3% figures were illustrative), and adoption and override rates among store managers were only briefly addressed. Evaluation and regression testing were added iteratively and not described in detail. Cost figures are the speaker's own. This is a talk summary with no limitations section.</p>",
+    "fixes": "<ul><li>Track store-manager override rate as the core online metric and hold out stores without directives to measure forecast lift.</li><li>Replay historical nights, including storms, as a regression suite with catalog-grounded assertions.</li><li>Add a per-night token budget and retry caps by failure type.</li></ul>",
+    "takeaway": "<p>The model layer is thin; the value is in the engineering around it: semantic validation through tool calls to a system of record, retries that cannot drop writes, and telemetry. The biggest saving is financial, not algorithmic, from matching a capacity model to a few overnight hours.</p>"
+  },
+  {
+    "edition": 18,
+    "id": "judge-input-assurance",
+    "group": "eval",
+    "org": "Xia, Lu, Li, Sejdinovic, Zhu · arXiv:2611.02676",
+    "flag": "agents",
+    "title": "Your judge's checks can pass while 53 of 60 graded steps are blank",
+    "hook": "A renderer dropped every structured tool call before an LLM judge graded the trajectories. Hashes matched, checkers passed and staging succeeded anyway. The paper turns 'did the judge see the evidence?' into four testable obligations that blocked 18 of 19 injected faults.",
+    "source": "arXiv 2611.02676, Nov 2, 2026",
+    "url": "https://arxiv.org/abs/2611.02676",
+    "problem": "<p>Pipelines that use an LLM judge to grade agent trajectories can silently feed the judge the wrong input. Hash and schema checks pass, so the judge is trusted anyway.</p>",
+    "solution": "<ul><li>Four input-assurance obligations, each with its own test: required content survives rendering; each checker covers its stated requirements; a failed check blocks later use; the judge reads the same bytes that were last checked.</li><li>Three controls: stop on failure, re-check packet hashes at staging and before dispatch, and reverse matching so every tool result answers a recorded call.</li><li><strong>Results:</strong> the renderer had dropped every structured tool call, leaving 53 of 60 judged steps blank. For one judge, the error-flag gap between error and correct steps shrank from 13 to 2 once tool calls were restored. The controls blocked 18 of 19 constructed faults; the miss was a stale script that never ran.</li></ul>",
+    "technology": "<ul><li>Trajectory-to-text renderer, hash manifest, staging copies, an inline checker and a separate disk checker, a recording stub judge, five judge configurations, tau2 trajectories</li></ul>",
+    "architecture": "<p>Runs are rendered to text packets, hashed, inline-checked, staged, disk-checked and dispatched, with failure gating at each step.</p>",
+    "flow": {
+      "nodes": [
+        {
+          "t": "Render",
+          "s": "runs become text packets",
+          "hot": true
+        },
+        {
+          "t": "Manifest + inline check",
+          "s": "expected hashes, validation"
+        },
+        {
+          "t": "Stage",
+          "s": "copies re-hashed"
+        },
+        {
+          "t": "Disk check",
+          "s": "re-read source and archive"
+        },
+        {
+          "t": "Dispatch",
+          "s": "judge reads staged bytes",
+          "hot": true
+        }
+      ],
+      "cap": "A hash proves bytes are unchanged, not that the content is there."
+    },
+    "learnings": "<ul><li><strong>Integrity is not coverage.</strong> Every check looked healthy while all four obligations were violated.</li><li><strong>Integration tests caught obligations 3 and 4;</strong> unit-level checks did not.</li><li><strong>Restoring tool calls</strong> cut the per-trajectory gap by 0.37 (95% cluster-bootstrap interval 0.17 to 0.53).</li></ul>",
+    "gaps": "<p><strong>One pipeline, 30 trajectories and 22 distinct user requests.</strong> Controls were developed on the same cohort, the 19 faults were written with knowledge of the code, and the restored rendering is still incomplete (tool results omit names and IDs, tau2 packets omit tool definitions). Judge configurations varied in model, prompt, schema, client and date at once. One judge's file-read tool did not check hashes, and a line-ending change was not among the 19 cases; by code inspection the controls would accept it. Transfer to independent pipelines and to naturally occurring violations is unmeasured.</p>",
+    "fixes": "<ul><li>Assert content coverage by comparing tool-call counts in the source against the packet.</li><li>Put the hash check in the judge's own read path, not only at staging.</li><li>Have faults written by someone other than the pipeline authors and run on independent pipelines.</li></ul>",
+    "takeaway": "<p>Treat the path from a run record to the judge's context window as a pipeline with its own correctness tests, separate from judge accuracy. An eval score is only as trustworthy as the packet the judge actually saw. This pairs with the judge-reliability briefs from the last edition.</p>"
+  },
+  {
+    "edition": 18,
+    "id": "inspect-logs-untrusted",
+    "group": "eval",
+    "org": "UK AI Security Institute · Inspect AI",
+    "title": "Inspect stops trusting its own eval logs",
+    "hook": "Rescoring a log no longer imports files or builds models that the log names, Docker file reads drop root by default, and a Terminals tab shows recorded agent shell sessions. Two of the changes are breaking, and the changelog gives no CVE or severity.",
+    "source": "Inspect AI changelog, 0.3.285 (Oct 25) to 0.3.287 (Oct 31), 2026",
+    "url": "https://inspect.aisi.org.uk/CHANGELOG.html",
+    "problem": "<p>Agent evals run model-driven commands in sandboxes. Evaluators need faithful terminal transcripts, correct permission boundaries, and log tooling that does not execute or import things named inside untrusted logs. Release dates sit at the edge of the window.</p>",
+    "solution": "<ul><li><strong>Breaking (0.3.286):</strong> Docker <code>read_file()</code> now uses the container's default user, so privileged reads must request <code>user=\"root\"</code>.</li><li><strong>Breaking (0.3.286):</strong> recomputing, editing or recovering a log no longer imports files or builds models the log names; 0.3.287 extends this to <code>inspect score</code>.</li><li>Fixes enforce user permissions for sandbox file access and stop agent commands from bypassing transcript recording. The viewer gains a Terminals tab.</li><li>0.3.287: runtimes can hold and rewrite a <code>react()</code> conversation at turn boundaries, compaction handlers gain <code>reset()</code>, and the sentinel host exposes a monitor model's input budget and token count.</li></ul>",
+    "technology": "<ul><li>Python eval framework, Docker sandboxes, the .eval log format, viewer UI, the react() agent loop, sentinel monitor steps</li></ul>",
+    "architecture": "<p>The harness sits between untrusted task output and the evaluator's machine, so the changes move the trust boundary on both sides.</p>",
+    "flow": {
+      "nodes": [
+        {
+          "t": "Task + solver",
+          "s": "react() agent loop"
+        },
+        {
+          "t": "Sandbox",
+          "s": "least-privilege file reads",
+          "hot": true
+        },
+        {
+          "t": "Recording",
+          "s": "terminal sessions captured"
+        },
+        {
+          "t": "Log",
+          "s": "recompute and score never import",
+          "hot": true
+        },
+        {
+          "t": "Viewer",
+          "s": "Terminals tab for review"
+        }
+      ],
+      "cap": "Logs become data, not code."
+    },
+    "learnings": "<ul><li><strong>Eval logs are untrusted input:</strong> loading, scoring or editing one must not run code it names.</li><li><strong>Sandbox reads defaulted to privileged access;</strong> the fix breaks anyone who relied on that.</li><li><strong>Terminal transcripts</strong> are becoming a first-class audit artifact.</li></ul>",
+    "gaps": "<p>The changelog gives no benchmarks, CVE or severity statements and does not say how many users the breaking changes affect. 'Stop agent commands from bypassing transcript recording' is a fix claim with no coverage figure. I read only the changelog, not the GitHub release notes or code, and the last 3,066 characters of the page were not read.</p>",
+    "fixes": "<ul><li>Add a CI check that fails if any log-load path imports user-named modules.</li><li>Publish a threat model for logs and sandboxes.</li><li>Ship a lint that flags <code>read_file()</code> callers needing <code>user=\"root\"</code>.</li></ul>",
+    "takeaway": "<p>An eval harness is part of the attack surface because it ingests artifacts produced by models and tasks it does not control. Apply the same 'no execution on log load' rule to your own tooling.</p>"
+  },
+  {
+    "edition": 18,
+    "id": "ny-raise-act-clock",
+    "group": "eval",
+    "org": "New York State · RAISE Act",
+    "title": "New York's 72-hour AI incident clock starts January 1, and registration opens this month",
+    "hook": "Large frontier developers register with the state's DIGIT office in November 2026. From Jan 1, critical safety incidents must be reported within 72 hours, with quarterly catastrophic-risk summaries. Thresholds and penalties come from a law-firm alert, not the Governor's page.",
+    "source": "Governor's announcement, Sep 21, 2026 · Wiley alert, Apr 3, 2026",
+    "url": "https://governor.ny.gov/news/ai-safety-governor-hochul-announces-next-steps-regulate-major-ai-developers-and-protect-new",
+    "problem": "<p>Not new: the announcement is Sep 21, outside the two-week window, but the November registration window is live now, which is the operational consequence. There was no state registry or incident channel for frontier developers, and the law takes effect Jan 1, 2027.</p>",
+    "solution": "<ul><li>Register with DIGIT (inside the Department of Financial Services) in November 2026; filings become mandatory Jan 1, 2027.</li><li>Report a critical safety incident within 72 hours, and notify law enforcement within 24 hours if death or serious injury is imminent.</li><li>Publish a frontier AI framework updated annually (third-party assessments, weight security, internal-use risk) and a transparency report before deploying a new or modified frontier model; a system card can satisfy it.</li><li>File quarterly summaries of catastrophic-risk assessments from internal model use; renew the disclosure statement at least every two years.</li><li><strong>Per the Wiley alert only:</strong> frontier model means over 10^26 training operations, large developer means over $500M revenue, civil penalties up to $1M first violation and $3M later, DFS fines of $1,000 a day for failing to file, no private right of action.</li></ul>",
+    "technology": "<p>Not a technical item: a statute plus administrative filings.</p>",
+    "architecture": "<p>Read it as a set of required pipelines, each with a clock.</p>",
+    "flow": {
+      "nodes": [
+        {
+          "t": "Scope test",
+          "s": "compute and revenue thresholds"
+        },
+        {
+          "t": "Register",
+          "s": "DIGIT disclosure statement",
+          "hot": true
+        },
+        {
+          "t": "Publish",
+          "s": "framework, transparency report"
+        },
+        {
+          "t": "Assess",
+          "s": "quarterly internal-risk summary"
+        },
+        {
+          "t": "Report",
+          "s": "72-hour incident path",
+          "hot": true
+        }
+      ],
+      "cap": "Eval outputs become regulated filings."
+    },
+    "learnings": "<ul><li><strong>Governance now needs plumbing:</strong> an incident-detection SLA, a quarterly assessment cadence and a publication cadence.</li><li><strong>Thresholds mirror California's,</strong> so one compliance program can cover both states (per Wiley).</li><li><strong>Third-party assessments</strong> get a regulatory role.</li></ul>",
+    "gaps": "<p>The Governor's page gives no numeric thresholds or penalties; those come from a law-firm summary. Exact registration deadlines and the filing mechanism were not specified as of Sep 21, and 'critical safety incident' is not operationalized in anything I read. I did not read the statute or any DFS regulation, and federal preemption efforts could change the picture (not checked).</p>",
+    "fixes": "<ul><li>Map incident-response runbooks to a 72-hour clock with a named owner for the 'an incident occurred' decision.</li><li>Reuse system cards and eval reports as the transparency-report artifact.</li><li>Keep one cross-state matrix (NY and CA) so the same assessments satisfy both.</li></ul>",
+    "takeaway": "<p>Eval artifacts (system cards, third-party assessments, internal-use risk reports) become filings with provenance and versioning needs. The input-assurance brief above matters here: the evidence behind a filed assessment must be demonstrably what was evaluated.</p>"
+  },
+  {
+    "edition": 18,
+    "id": "mcp-transport-trust-gap",
+    "group": "protocol",
+    "org": "Cloud Security Alliance (CSA Labs)",
+    "title": "Eleven MCP SDK advisories share one bug: trusting the peer's word",
+    "hook": "Across the TypeScript, Python and Go SDKs, advisories from Dec 2025 to Oct 2026 trace to one pattern: inferring who is on the other end from something the peer controls. Upgrading alone does not fix it; operators must set issuers and rotate credentials.",
+    "source": "CSA Research Note 'MCP's Transport Trust Gap', Nov 9, 2026 · GitHub advisory GHSA-vqqp-x5qm-5qp4",
+    "url": "https://labs.cloudsecurityalliance.org/research/csa-research-note-mcp-transport-trust-gap-20261109-csa-style/",
+    "problem": "<p>'Transport trust gap' is the note's own label, not an industry vulnerability class. The MCP blog had no new posts after the Ruby SDK Tier 1 post on Oct 30, so this edition's protocol item is security only.</p>",
+    "solution": "<ul><li><strong>Browser-reachable localhost servers:</strong> DNS rebinding protection was off by default in the TS, Python and Go SDKs (CVE-2025-66414, CVE-2025-66416, CVE-2026-34742, CVSS v4 7.6); Go also accepted cross-site text/plain POSTs that skip CORS preflight (CVE-2026-33252, 7.1).</li><li><strong>Unbound OAuth issuers:</strong> a malicious MCP server could steer client secrets, auth codes, PKCE verifiers and refresh tokens to an attacker's authorization server (Python CVE-2026-115563 and TS CVE-2026-104850, both 7.5).</li><li><strong>Cross-client leakage:</strong> responses routed by JSON-RPC id alone (CVE-2026-25536, 7.1; CVE-2026-111770, 7.7); experimental tasks not bound to the creating session (CVE-2026-111767, 8.6, the highest in the set).</li><li>Fixes: issuer parameters, origin validation, per-session routing, session-bound tasks. I read the FastMCP advisory directly (4.1.2 adds an <code>issuer</code> parameter; affected 4.0.0 to 4.1.1, CVSS 5.9); the CVE figures otherwise come from the CSA page and are unverified.</li></ul>",
+    "technology": "<ul><li>MCP SDKs (TypeScript, Python, Go, FastMCP), OAuth 2.x with RFC 9207 issuer identification, localhost HTTP transports, JSON-RPC</li></ul>",
+    "architecture": "<p>Each advisory is a spot on the same attack path, with a fix layer at the SDK and a residual risk in stored credentials.</p>",
+    "flow": {
+      "nodes": [
+        {
+          "t": "Reachability",
+          "s": "web page or untrusted URL"
+        },
+        {
+          "t": "Handshake",
+          "s": "unverified origin or metadata",
+          "hot": true
+        },
+        {
+          "t": "Credential steering",
+          "s": "hostile issuer or shared id",
+          "hot": true
+        },
+        {
+          "t": "Leak",
+          "s": "tokens or other clients' responses"
+        },
+        {
+          "t": "Fix layer",
+          "s": "issuer allowlist, Origin checks"
+        }
+      ],
+      "cap": "Existing stored credentials stay exposed until rotated."
+    },
+    "learnings": "<ul><li><strong>Upgrading is not enough:</strong> set an expected issuer, re-bind stored credentials and rotate secrets.</li><li><strong>Patched SDKs reject shared server or transport instances,</strong> and some official README adapter examples used that pattern, so refactors come first.</li><li><strong>Local does not mean safe:</strong> a localhost HTTP server is reachable from any open web page.</li></ul>",
+    "gaps": "<p>The note gives no prevalence data and no evidence of exploitation in the wild. Several fixes are opt-in, and direct calls to the refresh and exchange functions stay exposed without extra steps. RFC 9207 checks do not help if the expected issuer came from the untrusted server's own metadata. Stdio and availability bugs are out of scope. I did not open the Adversa roundup's advisory on the reference server.</p>",
+    "fixes": "<ul><li>Make an issuer allowlist per server a required config, enforced in the SDK or a gateway.</li><li>Default localhost servers to stdio, or to HTTP with mandatory Origin checks and a token; extend the conformance suite to cover Origin, issuer and session binding.</li><li>Bind the session id into every response route and task handle in the spec.</li></ul>",
+    "takeaway": "<p>MCP's security model leaves identity checks to each SDK's defaults. The durable fix is to move these bindings into the protocol contract and conformance suite, where they become testable. This extends the OpenCode OAuth brief from last edition: the client-side and SDK-side halves of the same trust boundary.</p>"
+  },
+  {
+    "edition": 18,
+    "id": "sglang-0523-fusion",
+    "group": "serving",
+    "org": "SGLang",
+    "title": "SGLang 0.5.23 fuses decode and pages experts for latency",
+    "hook": "Opt-in megakernel and monokernel plugins claim up to 44% faster single-user decode on GB300 and 75% on MI350X, and Paged Experts runs oversized MoE on one consumer GPU, reportedly 30x faster than CPU offload. All figures are the project's own.",
+    "source": "SGLang GitHub release v0.5.23 (PyPI Oct 30; page shows Nov 2)",
+    "url": "https://github.com/sgl-project/sglang/releases/tag/v0.5.23",
+    "problem": "<p>Single-user decode latency, MoE first-token latency, and MoE models larger than GPU memory. The notes do not state these explicitly; this is my reading of the feature list. vLLM 0.33.0 was covered last edition.</p>",
+    "solution": "<ul><li>Opt-in megakernel (NVIDIA) and monokernel (AMD) fused-decode plugins: up to 44% faster single-user decode on GB300 and 75% on MI350X.</li><li>MoE first token 30%-58% sooner on 8K prompts on H200; DeepSeek-V4.1 on GB300 up to 1.5x prefill throughput under load and about 28% lower first-token latency on 32K-64K prompts.</li><li>Paged Experts (opt-in): up to 30x faster than CPU offload for MoE models bigger than GPU memory on one consumer GPU.</li><li>TPU7x via the SGLang-TorchTPU plugin; a LoRA engine for FP8 and NVFP4 MoE; HiCache file-based L3 prefix storage for MLA models with decode context parallelism; ten new models.</li><li>Removals spotted: the <code>--speculative-skip-dp-mlp-sync</code> flag and the tokenspeed_mla attention backend; no breaking-changes section was visible.</li></ul>",
+    "technology": "<ul><li>SGLang, HiCache tiered prefix cache, NVFP4 and FP8, GB300, H200, MI350X, TPU7x, expert paging</li></ul>",
+    "architecture": "<p>Prefill and decode are disaggregated; hot experts stay on the GPU with the rest in host memory; decode can use a fused kernel; the prefix cache tiers down to files.</p>",
+    "flow": {
+      "nodes": [
+        {
+          "t": "Routing",
+          "s": "prefill and decode split"
+        },
+        {
+          "t": "Prefill",
+          "s": "faster on GB300"
+        },
+        {
+          "t": "Expert residency",
+          "s": "Paged Experts",
+          "hot": true
+        },
+        {
+          "t": "Decode",
+          "s": "fused mega or monokernel",
+          "hot": true
+        },
+        {
+          "t": "Prefix cache",
+          "s": "HiCache with L3 files"
+        }
+      ],
+      "cap": "GPU memory becomes one tier in a hierarchy."
+    },
+    "learnings": "<ul><li><strong>Fused-kernel plugins are the main latency lever,</strong> and the gains are vendor- and single-user-specific.</li><li><strong>Expert offload is moving from CPU offload to explicit paging;</strong> the 30x is against CPU offload, not against a model that fits.</li><li><strong>Cadence is about two weeks</strong> with 700-800 PRs each.</li></ul>",
+    "gaps": "<p>Benchmarks are the project's own 'up to' figures; batch sizes, baselines and hardware counts were not visible in the part I could read, and no absolute tokens-per-second was quoted. Paged Experts has no stated throughput versus a fully resident model. The notes were cut off mid-way through the diffusion section, so deprecations may be missing, and single-user gains may not carry to batched serving.</p>",
+    "fixes": "<ul><li>Publish absolute tokens/s and p50/p99 latency at several concurrency levels with a script.</li><li>Compare Paged Experts to fully resident multi-GPU serving and report expert hit rate.</li><li>Add a 'Breaking changes' heading to every release.</li></ul>",
+    "takeaway": "<p>Serving engines are competing on hardware-specific fusion and memory tiering. The cost is a growing matrix of opt-in features whose combined behavior is poorly characterized, so benchmark your own workload before enabling them.</p>"
+  },
+  {
+    "edition": 18,
+    "id": "engram-verified-consolidation",
+    "group": "context",
+    "org": "Yang, Li, Li, Yin, Xue, Salim · arXiv:2611.09472",
+    "flag": "retrieval",
+    "title": "ENGRAM deletes agent memory only after the weights prove they learned it",
+    "hook": "Agents promote learned skills from retrieval memory into weights, but external records are released only if the tuned model without retrieval matches the base model with it on held-out probes. Failed skills stay retrievable. Read from the abstract only, with no numbers.",
+    "source": "arXiv 2611.09472, submitted Nov 6, 2026 (abstract page only)",
+    "url": "https://arxiv.org/abs/2611.09472",
+    "problem": "<p>Agents store experience in external memory and retrieve it, which costs input tokens and model calls on every task. Moving skills into weights could cut that cost, but deleting the external record before checking that the model learned the skill is risky.</p>",
+    "solution": "<ul><li><strong>Training admission:</strong> a demonstration-aware gate admits a skill if the student has mastered it or has enough successful teacher demonstrations.</li><li><strong>Memory release:</strong> a verification gate compares the updated model without retrieval against the base model with retrieval on reserved probe tasks, and releases records only if both relative and absolute criteria pass.</li><li>Reported qualitatively: gains over frozen-weight controls on interactive and reasoning benchmarks, a smaller retrievable footprint close to a retain-all baseline, better than immediate or random release, and fewer input tokens and model calls.</li></ul>",
+    "technology": "<ul><li>Selective adapter activation (type not stated), the Engram Trace Graph memory structure, teacher-student distillation from action traces, held-out probe tasks</li></ul>",
+    "architecture": "<p>Stage detail is from the abstract only; HTML and PDF fetches were rate-limited.</p>",
+    "flow": {
+      "nodes": [
+        {
+          "t": "Capture",
+          "s": "action traces in a trace graph"
+        },
+        {
+          "t": "Admission gate",
+          "s": "what may be trained",
+          "hot": true
+        },
+        {
+          "t": "Consolidation",
+          "s": "student training, selective adapters"
+        },
+        {
+          "t": "Verification",
+          "s": "no-retrieval vs base with retrieval",
+          "hot": true
+        },
+        {
+          "t": "Release or fallback",
+          "s": "failed skills stay retrievable"
+        }
+      ],
+      "cap": "Retrieval is the safety net until the weights prove they hold the skill."
+    },
+    "learnings": "<ul><li><strong>Memory deletion becomes an evidence-backed step,</strong> not a heuristic.</li><li><strong>External memory acts as a cache</strong> and weights as a slower, riskier store, with a promotion policy between them.</li></ul>",
+    "gaps": "<p><strong>I read only the abstract,</strong> so there are no benchmark names, model sizes, baselines or percentages here. The abstract has no limitations. Probe tasks must represent real use; skills that pass probes could still fail in production. How cross-skill weight interference over time is handled is not stated. It is a preprint, and the code is on an anonymous host, which suggests an anonymous submission.</p>",
+    "fixes": "<ul><li>Re-verify periodically after release and keep a compact fallback index so a released skill can be restored.</li><li>Test drift: change the tool or environment after consolidation and measure when released skills break.</li><li>Use per-skill adapters with rollback.</li></ul>",
+    "takeaway": "<p>This sits between pure RAG and unconditional fine-tuning. For a retrieval team the question is when a retrieved note has earned the right to become a weight, and the answer here is a probe-based verification gate rather than a count or a date.</p>"
   }
 ];
 
@@ -4929,41 +5343,41 @@ const GROUPS = [
 
 const SIGNAL = [
   {
-    "n": "Reflection AI's Beam: a 501B open-weight MoE under Apache 2.0, with Nvidia reportedly weighing an acquisition",
-    "d": "Reflection announced Beam Oct 5; LLM Daily headlined a launch Nov 4. Release timing conflicts across sources: one third-party write-up says weights reached Hugging Face Oct 16 under plain Apache 2.0, another said Oct 5 that they were still unreleased, and I could not verify against Hugging Face or Reflection directly. It is a text-only sparse MoE with 501B total and about 23B active parameters, a 1M-token context, 23.8T pretraining tokens, and an RL run on 10,500 GB300 GPUs for four weeks. Reflection's own claims, not independently verified per TechCrunch: SWE-Bench Verified 80.9, Terminal-Bench v2.1 80.1, SWE-Bench Pro v2-Hard 77.2, and 3-4x less inference compute than rival Western open models. One third-party figure points the other way: an Artificial Analysis score of 30 against 45 for DeepSeek V4.1 Flash and GLM-5.3. Serving cost, per that write-up: about 353 GB of GPU memory for NVFP4 (4x B200/B300 or 8x H100), about 604 GB for FP8, CUDA-only kernels, a special reflection-beam vLLM image, a roughly 10-minute first start, and a sample serve command capped at 262K context; vLLM 0.33.0 lists Beam-1.0 support. Some users reported looping in long agent runs. The FT reported Oct 10 that Nvidia is in early talks to deepen its investment, acquire Reflection or hire its team; no price is reported and the talks could collapse."
+    "n": "Anthropic ships Claude Fable 5.2 and Mythos 5.2: 1M context, $8/$40 per million tokens, and 400 errors for some older request shapes",
+    "d": "Nov 9, per the Claude Developer Platform release notes as summarized by the releasebot aggregator; I did not open Anthropic's own docs, so the exact wording and GA or beta status of each model are unverified. Both models have a 1M-token context window, 128k max output and always-on adaptive thinking. Price is $8 per million input and $40 per million output tokens, down from $10 and $50 for the 5.1 versions. Fast mode for Fable 5.2 gives up to 2.5x output speed at $16 and $80. Mythos 5.2 is restricted to organizations verified through Anthropic's programs. The consequences for an existing integration: the prefix check now applies to all accounts, so requests that edit earlier content and resend thinking blocks can return a 400; requests using the older computer_20251124 tool also return 400 except on Amazon Bedrock; both models require 30-day data retention and are unavailable under zero data retention unless Anthropic authorizes it, which matters for regulated workloads; with the beta advisor tool, a Fable 5.2 or Mythos 5.2 executor must use one of those two models as its advisor. Also dated Nov 5: a beta Console IP allowlist (IPv4, IPv6 and CIDR, up to 1,000 per organization) that refuses requests from other addresses, limiting where a leaked key works; Compliance API security-posture data for Enterprise; and an Admin API option to sign a member out everywhere. Claude Code: the changelog's newest entry I could see is still 2.1.311 (Oct 26)."
   },
   {
-    "n": "Claude Developer Platform, Oct 28 to Nov 3: 128 MB requests, server-side threads, a new usage API, and Opus 4.8 fast mode ends Nov 30",
-    "d": "From the releasebot aggregator, not cross-checked against Anthropic's docs. Oct 28: the request size limit for the Messages and Token Counting APIs rose from 32 MB to 128 MB. Oct 29: a beta Usage and Cost Analytics API reports by model, workspace, API key and requester, and the older usage and cost APIs are now legacy but supported. Nov 2: beta server-side message threads let later requests send only new messages, which can cut request size and time to first token; threads expire 5 minutes after the last request. Oct 30: Opus 4.8 fast mode is deprecated and will error after Nov 30, 2026. Nov 3: text from Claude Mythos 5, Opus 4.7 and Sonnet 4.6 now carries an Anthropic text watermark (on Sonnet 4.6 it may be absent with non-default sampling settings). The 128 MB limit and server threads change how RAG and agent payloads are assembled, and any cost dashboard on the old endpoints needs a migration. Claude Code: the changelog's newest entry is still 2.1.311 (Oct 26), so there was no new release since last edition."
+    "n": "OpenAI reportedly raises $11B at a $1.25T valuation while voters push back on data centers",
+    "d": "Reported, not confirmed: LLM Daily's Nov 6-9 issues citing TechCrunch; I did not open the originals. The $11B round has not formally closed and is expected to within weeks, and OpenAI has reportedly signalled a 2027 IPO timeline. In the midterms, voters weighed in on 41 data center ballot measures and 40 of 41 pushed for greater restrictions on development. Google bought a troubled Wyoming data center project from Crusoe, price not given, and operators are reportedly using repurposed jet engines for on-site power because grid access and turbine delivery take years. The infrastructure reading is that capital is plentiful and power and local permitting are the binding constraints, so expect projects to change hands and slip. That is an inference from headlines, with no capacity figures behind it."
   },
   {
-    "n": "NIST, NSA and CISA publish voluntary incident-response practices for training and evaluating superintelligent systems",
-    "d": "NIST CAISSI with NSA and CISA, Oct 16: 10 key practices across 5 stages (preparation, detection, response, recovery, reporting), building on NIST SP 800-61r3 and covering agents that take significant uninstructed actions undermining operator controls. It is voluntary and the page states no deadline or mandate. I read the announcement only, not the linked PDF or the 10 practices, so there is nothing yet to say about operational detail. It is the incident-handling counterpart to the eval-side briefs this edition."
+    "n": "Fal raises $1.3B at a $16B valuation; Meta acquires the agent-orchestration startup Conductor",
+    "d": "Nov 3-4, from LLM Daily's Nov 5 issue citing TechCrunch; the originals were not opened. Bessemer led the Fal round and the valuation doubled; Fal is a five-year-old inference startup, so this is a demand signal for inference capacity. Meta bought Conductor, an AI coding startup that lets engineers deploy teams of agents across parts of a project, with no deal value disclosed, which suggests agent orchestration is being bought rather than built. The Fal item is about nine days old, slightly outside the usual window."
   }
 ];
 
 const REPOS = [
   {
-    "n": "cheaper-inference/OmniRoute",
-    "url": "https://github.com/cheaper-inference/OmniRoute",
-    "d": "About 84.5k stars, 12.7k forks, MIT, 12,196 commits on branch release/v3.8.53, 218 open issues and 338 pull requests (rounded page counts; no release tag or date visible). New to the digest. An AI gateway: one endpoint in front of many providers, usable from Claude Code, Codex, Cursor and Cline, with fallback routing across four provider tiers. Its own figures are inconsistent (375 providers in the description versus 380 in the README, 1,400+ models, 20 routing strategies, 110 MCP tools) and its prompt-compression claim of 15-95% savings, about 89% on average, shows no methodology. The README's '1.62B free tokens a month' is its estimate of third-party free tiers, not something it grants. Stated limits: auto routing needs an eligible route, keyless providers may reject third-party clients, and providers flagged tos: avoid are excluded. Missing: any routing-quality or latency benchmark, and a language breakdown. For LLMOps, the useful part is a gateway with explicit fallback and a terms-of-service flag per provider."
-  },
-  {
-    "n": "firecrawl/firecrawl",
-    "url": "https://github.com/firecrawl/firecrawl",
+    "n": "infiniflow/ragflow",
+    "url": "https://github.com/infiniflow/ragflow",
     "flag": "retrieval",
-    "d": "About 196.1k stars (findarepo said 198k), 10.4k forks, 6,714 commits on main; primarily AGPL-3.0 with the SDKs and some UI components MIT, which matters if you self-host it inside a product. New to the digest. The page's description is 'Supercharge your AI agents with data from the web and beyond.' This is a thin entry: I did not read the README feature list, so I cannot describe its crawl or scrape capabilities, and I saw no release information or crawl-quality figure. Included because web ingestion is the front of many RAG pipelines and the licence is the decision point."
+    "d": "93.7k stars, 11.3k forks, Apache-2.0, 10,880 commits on main, 915 open issues and 425 open pull requests; findarepo has it at 94k with +534 over seven days. New to the digest. An open-source RAG engine pitched as an 'agent-native database', listing agentic retrieval, knowledge compilation, template-based chunking and citations. Install steps check out v1.0.0 and the news section says 1.0.0-rc1 shipped 2026-09-29; I could not see the final release date. Requirements are heavier than the pitch: Docker 24 and Compose 2.26.1 or later, a recommended 4 cores, 16 GB RAM and 50 GB disk, vm.max_map_count of at least 262144 if you use Elasticsearch, and you must bring your own LLM, embedding model and reranker. Stated limits: Docker deployment is not currently supported on macOS; in the 1.0 open-source release, layout analysis, OCR and table recognition run on CPU only; and the container has no Compose healthcheck. Missing: any retrieval-quality benchmark and a last-commit date."
   },
   {
-    "n": "herdrdev/herdr",
-    "url": "https://github.com/herdrdev/herdr",
-    "d": "About 46.2k stars (findarepo said 48k), 3.7k forks, Apache-2.0, 1,878 commits on master. New to the digest. A terminal runtime for coding agents, apparently written in Rust: a background server keeps terminals alive when the client closes or SSH drops, a combined list marks each pane working, blocked or idle across saved remote machines, and agents can drive it through a CLI and socket API; it works with Claude Code, Codex, Cursor and OpenCode. Stated limits: processes do not survive a server or machine restart (layout is restored and supported agent sessions can resume), and Windows is a beta. Missing: a release tag, benchmarks and resource overhead. It is operations tooling for running many agents, not a framework."
+    "n": "deepseek-ai/deepseek-harness (dsh)",
+    "url": "https://github.com/deepseek-ai/deepseek-harness",
+    "d": "272.9k stars (findarepo says 279k, +6.7k over seven days), 33.2k forks, MIT, 25,848 commits on master. New to the digest. An agent harness from DeepSeek built on the Cordis plugin framework with an everything-is-a-plugin architecture; run it with npx @deepseek-ai/dsh web. The README says developer preview, warns 'THERE WILL BE COMPATIBILITY-BREAKING CHANGES' and points to a SAFETY.md notice before running. I could not read the architecture doc, so I cannot say how plugins, tool calling or sandboxing work, and the Releases section was empty in the capture. A risk note from the same ranking: findarepo's number one repo, Ebony-Vinyl/dsh-our-free-model (69k stars, +9.5k in a week), claims a dsh plugin giving frontier models with no login or API key. I did not open it. Treat it as suspect and a plausible supply-chain risk for dsh users, in the same family as freellmapi from edition 013."
   },
   {
-    "n": "NousResearch/hermes-agent",
-    "url": "https://github.com/NousResearch/hermes-agent",
+    "n": "paperclipai/paperclip",
+    "url": "https://github.com/paperclipai/paperclip",
     "flag": "agents",
-    "d": "About 260k stars, 57.3k forks, MIT, 61,708 commits on main; those are very large numbers for this kind of project and I could not verify them beyond the page text. New to the digest. A self-improving personal agent that, per the README, creates skills from experience and refines them in use, with six terminal backends (local, Docker, SSH, Modal, Daytona, Vercel Sandbox), subagents, and a cron scheduler. The retrieval-relevant part is memory: agent-curated memory with persistence nudges and FTS5 full-text session search with LLM summarization for cross-session recall, which is keyword search, not a vector index. Missing: any benchmark of the self-improvement claim or of recall quality, and a release tag."
+    "d": "112.8k stars, 18.7k forks, MIT, 7,327 commits on master, with about 3.6k open issues and 3k open pull requests, a backlog that is large for the repo's age. New to the digest. A Node.js server with a React UI that assigns goals, tasks, budgets and org-chart roles to agents such as Claude Code, Codex, OpenClaw and Cursor through adapters, with heartbeat-based execution, approvals, cost tracking, budgets, schedules, secrets and activity logs; embedded PostgreSQL locally, external Postgres in production. Stated limits: Memory/Knowledge, Agent Chat and Cloud deployments are in progress and several roadmap items are not started; Agent Chat and the chat and email connectors are experimental; budget stops rely on recorded spend, so reporting delays and in-flight work can postpone enforcement; sandbox availability depends on environment and adapter; telemetry is on by default with an opt-out. Missing: release history and a last-commit date."
+  },
+  {
+    "n": "browser-use/browser-use",
+    "url": "https://github.com/browser-use/browser-use",
+    "d": "120k stars (findarepo 121k, +681 over seven days), 13.4k forks, MIT, 10,438 commits on main, 182 open issues and 446 pull requests. New to the digest. A Python library (3.11 or later) for browser agents, plus a hosted Browser Use Cloud with stealth browsers; it needs an LLM key and local Chrome unless you use cloud browsers, and the Bash tool needs Linux, macOS or WSL. Stated limits: CAPTCHA avoidance is not guaranteed; profile sync copies cookies only; replaying a saved run raises an error if the page changed and the steps before the failure have already executed; and saved history files can contain sensitive page snapshots even though typed secrets are stored as placeholders. Cloud browsers cost $0.02 per browser-hour plus network traffic, with model inference billed separately. The 90.5% on Stealth Bench V2 is vendor-reported for the cloud product and I did not verify it. Missing: a release tag and a last-commit date."
   }
 ];
 
@@ -4979,7 +5393,7 @@ const FIELDS = [
   {k: "takeaway",     l: "Architectural takeaway", cls: "field-take"}
 ];
 
-const EDITION_DATES = {5: "Wed, Sep 09, 2026", 6: "Sun, Sep 13, 2026", 7: "Wed, Sep 16, 2026", 8: "Sun, Sep 20, 2026", 9: "Wed, Sep 23, 2026", 10: "Sun, Sep 27, 2026", 11: "Sun, Oct 04, 2026", 12: "Sun, Oct 18, 2026", 13: "Sun, Oct 25, 2026", 14: "Sun, Oct 25, 2026", 15: "Wed, Oct 28, 2026", 16: "Sun, Nov 01, 2026", 17: "Wed, Nov 04, 2026"};
+const EDITION_DATES = {5: "Wed, Sep 09, 2026", 6: "Sun, Sep 13, 2026", 7: "Wed, Sep 16, 2026", 8: "Sun, Sep 20, 2026", 9: "Wed, Sep 23, 2026", 10: "Sun, Sep 27, 2026", 11: "Sun, Oct 04, 2026", 12: "Sun, Oct 18, 2026", 13: "Sun, Oct 25, 2026", 14: "Sun, Oct 25, 2026", 15: "Wed, Oct 28, 2026", 16: "Sun, Nov 01, 2026", 17: "Wed, Nov 04, 2026", 18: "Thu, Nov 12, 2026"};
 
 BRIEFS.forEach(b => { if (!b.edition) b.edition = CURRENT_EDITION; });
 
